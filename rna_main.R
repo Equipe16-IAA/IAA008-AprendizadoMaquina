@@ -24,24 +24,35 @@ teste <-dados[-ind,]
 
 ## Prepara um grid com os valores de K que serao usados
 
-tuneGrid <- expand.grid(k=c(1,3,5,7,9, 10))
+#tuneGrid <- expand.grid(k=c(1,3,5,7,9))
 
 
 ##executa o KNN com esse grid
 
-knn <- train(tipo~.,data = treino, method = "knn", tuneGrid=tuneGrid)
+rna <- train(tipo~.,data = treino, method = "nnet", linout=1, trace=FALSE)
 
-knn
+rna
 
 ##Aplica o modelo no arquivo de teste
-predict.knn <- predict(knn,teste)
+predict.rna <- predict(rna,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.knn, as.factor(teste$tipo))
+confusionMatrix(predict.rna, as.factor(teste$tipo))
 
-#rmse(teste$tipo, predict.knn)
+#rmse(teste$tipo, predict.rna)
 
 #r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
 
-#r2(predict.knn, teste$tipo)
+#r2(predict.rna, teste$tipo)
+
+
+
+
+##Crosvalidation e parametrizacao da RNA
+
+#control <- trainControl(method='cv', number = 10)
+#tuneGrid <- expand.grid(size = seq(from = 1, to = 3, by = 1), decay=seq(from = 0.1, to0.7, by = 0.3))
+
+#rna <- train(tipo~., data = treino, method="nnet", trainControl = control, tuneGrid = tuneGrid, linout =T, MaxNWts = 10000, maxit=2000, trafe = F)
+#rna
