@@ -22,23 +22,21 @@ ind <-createDataPartition(dados$tipo, p=0.80, list=FALSE)
 treino <-dados[ind,]
 teste <-dados[-ind,]
 
-## Prepara um grid com os valores de K que serao usados
-
-tuneGrid <- expand.grid(k=c(1,3,5,7,9, 10))
-
+##Cross-Validation
+control <- trainControl(method='cv', number = 10)
 
 ##executa o KNN com esse grid
 
-knn <- train(tipo~.,data = treino, method = "knn", tuneGrid=tuneGrid)
+svm <- train(tipo~.,data = treino, method = "svmRadial", trControl = control)
 
-knn
+svm
 
 ##Aplica o modelo no arquivo de teste
-predict.knn <- predict(knn,teste)
+predict.svm <- predict(svm,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.knn, as.factor(teste$tipo))
+confusionMatrix(predict.svm, as.factor(teste$tipo))
 
 #rmse(teste$tipo, predict.knn)
 

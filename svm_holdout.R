@@ -29,16 +29,16 @@ tuneGrid <- expand.grid(k=c(1,3,5,7,9, 10))
 
 ##executa o KNN com esse grid
 
-knn <- train(tipo~.,data = treino, method = "knn", tuneGrid=tuneGrid)
+svm <- train(tipo~.,data = treino, method = "svmRadial")
 
-knn
+svm
 
 ##Aplica o modelo no arquivo de teste
-predict.knn <- predict(knn,teste)
+predict.svm <- predict(svm,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.knn, as.factor(teste$tipo))
+confusionMatrix(predict.svm, as.factor(teste$tipo))
 
 #rmse(teste$tipo, predict.knn)
 

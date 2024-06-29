@@ -27,18 +27,22 @@ teste <-dados[-ind,]
 tuneGrid <- expand.grid(k=c(1,3,5,7,9, 10))
 
 
+##Cross-Validation
+control <- trainControl(method='cv', number = 10)
+
+
 ##executa o KNN com esse grid
 
-knn <- train(tipo~.,data = treino, method = "knn", tuneGrid=tuneGrid)
+rf <- train(tipo~.,data = treino, method = "rf", trControl = control)
 
-knn
+rf
 
 ##Aplica o modelo no arquivo de teste
-predict.knn <- predict(knn,teste)
+predict.rf <- predict(rf,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.knn, as.factor(teste$tipo))
+confusionMatrix(predict.rf, as.factor(teste$tipo))
 
 #rmse(teste$tipo, predict.knn)
 
