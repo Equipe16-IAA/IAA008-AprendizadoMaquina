@@ -15,33 +15,24 @@ dados$a <- NULL
 #View(dados)
 
 
-
-set.seed(42)
+#(Ano atual com 4 dígitos + 2 algarismos do dígito verificador do CPF de um dos integrantes)
+set.seed(2034)
 
 ind <-createDataPartition(dados$tipo, p=0.80, list=FALSE)
 treino <-dados[ind,]
 teste <-dados[-ind,]
 
-## Prepara um grid com os valores de K que serao usados
-
-tuneGrid <- expand.grid(k=c(1,3,5,7,9, 10))
-
 
 ##executa o KNN com esse grid
 
-svm <- train(tipo~.,data = treino, method = "svmRadial")
+rna <- train(tipo~.,data = treino, method = "nnet", linout=1, trace=FALSE)
 
-svm
+rna
 
 ##Aplica o modelo no arquivo de teste
-predict.svm <- predict(svm,teste)
+predict.rna <- predict(rna,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.svm, as.factor(teste$tipo))
+confusionMatrix(predict.rna, as.factor(teste$tipo))
 
-#rmse(teste$tipo, predict.knn)
-
-#r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
-
-#r2(predict.knn, teste$tipo)

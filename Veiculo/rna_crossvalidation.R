@@ -15,31 +15,33 @@ dados$a <- NULL
 #View(dados)
 
 
-
-set.seed(42)
+#(Ano atual com 4 dígitos + 2 algarismos do dígito verificador do CPF de um dos integrantes)
+set.seed(2034)
 
 ind <-createDataPartition(dados$tipo, p=0.80, list=FALSE)
 treino <-dados[ind,]
 teste <-dados[-ind,]
 
-##Cross-Validation
+##Crosvalidation e parametrizacao da RNA
+
 control <- trainControl(method='cv', number = 10)
 
-##executa o KNN com esse grid
-
-svm <- train(tipo~.,data = treino, method = "svmRadial", trControl = control)
-
-svm
+rna <- train(tipo~., data = treino, method="nnet", trainControl = control, linout =T, MaxNWts = 10000, maxit=2000, trace = F)
+rna
 
 ##Aplica o modelo no arquivo de teste
-predict.svm <- predict(svm,teste)
+predict.rna <- predict(rna,teste)
 
 ##mostra as métricas
 
-confusionMatrix(predict.svm, as.factor(teste$tipo))
+confusionMatrix(predict.rna, as.factor(teste$tipo))
 
-#rmse(teste$tipo, predict.knn)
+#rmse(teste$tipo, predict.rna)
 
 #r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
 
-#r2(predict.knn, teste$tipo)
+#r2(predict.rna, teste$tipo)
+
+
+
+
