@@ -1,0 +1,34 @@
+### Pacotes necessários
+#install.packages("e1071")
+#install.packages("caret")
+library("caret")  
+library(Metrics)
+
+
+
+##Leitura da database
+setwd("D:/GIT/IAA008-AprendizadoMaquina/")
+
+dados <- read.csv("databases/6 - Veiculos - Dados.csv", header = T)
+dados$a <- NULL
+
+View(dados)
+
+
+#(Ano atual com 4 dígitos + 2 algarismos do dígito verificador do CPF de um dos integrantes)
+set.seed(2034)
+
+
+ind <-createDataPartition(dados$tipo, p=0.80, list=FALSE)
+treino <-dados[ind,]
+teste <-dados[-ind,]
+
+## 
+
+km.res = kmeans(ind,10)
+print(km.res)
+
+table(km.res$cluster, ind)
+
+
+
