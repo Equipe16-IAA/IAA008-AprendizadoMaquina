@@ -42,8 +42,11 @@ predict.knn <- predict(knn,teste)
 rmse(teste$biomassa, predict.knn)
 mae(teste$biomassa, predict.knn)
 cor(teste$biomassa, predict.knn, method = "pearson")
-#syx <- function(observados, estimados, n, p){ return sqrt((sum((observados-estimados)^2))/(n-p-1)) }
-#syx(teste$biomassa, predict.knn)
+# regressão Syx
+Syx <- function(predito, observado, p) {
+  return(sqrt(sum((observado - predito)^2) / (length(observado) - p)))
+}
+Syx(predict.knn,teste$biomassa,ncol(teste) - 1)
 r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
 
 r2(predict.knn, teste$biomassa)

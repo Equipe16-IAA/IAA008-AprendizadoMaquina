@@ -34,11 +34,17 @@ predict.rna <- predict(rna,teste)
 
 ##mostra as métricas
 
+
 rmse(teste$biomassa, predict.rna)
 mae(teste$biomassa, predict.rna)
 cor(teste$biomassa, predict.rna, method = "pearson")
-#syx <- function(observados, estimados, n, p){ return sqrt((sum((observados-estimados)^2))/(n-p-1)) }
-#syx(teste$biomassa, predict.rna)
+
+# regressão Syx
+Syx <- function(predito, observado, p) {
+  return(sqrt(sum((observado - predito)^2) / (length(observado) - p)))
+}
+Syx(predict.rna,teste$biomassa,ncol(teste) - 1)
+
 r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
 
 r2(predict.rna, teste$biomassa)
