@@ -42,8 +42,10 @@ predict.rf <- predict(rf,teste)
 rmse(teste$ChanceOfAdmit, predict.rf)
 mae(teste$ChanceOfAdmit, predict.rf)
 cor(teste$ChanceOfAdmit, predict.rf, method = "pearson")
-#syx <- function(observados, estimados, n, p){ return sqrt((sum((observados-estimados)^2))/(n-p-1)) }
-#syx(teste$ChanceOfAdmit, predict.rf)
+Syx <- function(predito, observado, p) {
+  return(sqrt(sum((observado - predito)^2) / (length(observado) - p)))
+}
+Syx(predict.rf,teste$ChanceOfAdmit,ncol(teste) - 1)
 r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum((observado-mean(observado))^2)))}
 
 r2(predict.rf, teste$ChanceOfAdmit)

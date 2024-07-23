@@ -18,17 +18,10 @@ View(dados)
 #(Ano atual com 4 dígitos + 2 algarismos do dígito verificador do CPF de um dos integrantes)
 set.seed(2034)
 
-
-ind <-createDataPartition(dados$tipo, p=0.80, list=FALSE)
-treino <-dados[ind,]
-teste <-dados[-ind,]
-
-## 
-
-km.res = kmeans(ind,10)
+km.res = kmeans(dados[, 0:(ncol(dados) - 1)],10)
 print(km.res)
 
-table(km.res$cluster, ind)
+table(km.res$cluster, dados$tipo)
 
 
 
