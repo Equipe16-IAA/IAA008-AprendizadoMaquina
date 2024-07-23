@@ -23,7 +23,7 @@ teste <-dados[-ind,]
 
 ##executa o RNA com esse grid
 
-rna <- train(biomassa~.,data = treino, method = "nnet",trace=FALSE)
+rna <- train(biomassa~.,data = treino, method = "nnet",trace=FALSE, linout = T)
 
 rna
 

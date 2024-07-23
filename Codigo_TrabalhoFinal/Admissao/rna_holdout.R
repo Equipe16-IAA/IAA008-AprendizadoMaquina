@@ -26,7 +26,7 @@ teste <-dados[-ind,]
 
 ##executa o RNA com esse grid
 
-rna <- train(ChanceOfAdmit~.,data = treino, method = "nnet",trace=FALSE)
+rna <- train(ChanceOfAdmit~.,data = treino, method = "nnet",trace=FALSE, linout = T)
 
 rna
 

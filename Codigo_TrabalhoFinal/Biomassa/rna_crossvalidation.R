@@ -26,7 +26,7 @@ teste <-dados[-ind,]
 
 control <- trainControl(method='cv', number = 10)
 
-rna <- train(biomassa~., data = treino, method="nnet", trainControl = control, trace = F)
+rna <- train(biomassa~., data = treino, method="nnet", trainControl = control, trace = F, linout = T)
 rna
 
 ##Aplica o modelo no arquivo de teste
