@@ -58,7 +58,7 @@ View(dados_novos_casos)
 
 dados_novos_casos$ChanceOfAdmit <- NULL
 predict.rf <- predict(rf, dados_novos_casos)
-resultado <- cbind(dados_novos_casos, predict.svm)
+resultado <- cbind(dados_novos_casos, predict.rf)
 View(resultado)
 
 
