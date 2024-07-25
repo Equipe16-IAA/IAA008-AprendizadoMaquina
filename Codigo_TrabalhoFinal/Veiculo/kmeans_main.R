@@ -1,6 +1,4 @@
 ### Pacotes necessários
-#install.packages("e1071")
-#install.packages("caret")
 library("caret")  
 library(Metrics)
 
@@ -21,7 +19,10 @@ set.seed(2034)
 km.res = kmeans(dados[, 0:(ncol(dados) - 1)],10)
 print(km.res)
 
-table(km.res$cluster, dados$Class)
+
+
+table(km.res$cluster, dados$tipo)
+write.csv(table(km.res$cluster, dados$tipo), "kmeans.csv")
 
 resultado <- cbind(dados,km.res$cluster)
 resultado

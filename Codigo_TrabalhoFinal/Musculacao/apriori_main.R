@@ -20,3 +20,4 @@ summary(rules)
 options(digits=2)
 
 inspect(sort(rules, by="confidence"))
+write.csv(inspect(sort(rules, by="confidence")),"apriori.csv")
