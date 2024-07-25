@@ -39,3 +39,13 @@ predict.svm <- predict(svm,teste)
 confusionMatrix(predict.svm, as.factor(teste$tipo))
 
 
+
+### PREDIÇÕES DE NOVOS CASOS
+dados_novos_casos <- read.csv("databases/6 - Veiculo - novosdados.csv", header = T)
+dados_novos_casos$a <- NULL
+View(dados_novos_casos)
+
+predict.svm <- predict(svm, dados_novos_casos)
+resultado <- cbind(dados_novos_casos, predict.svm)
+resultado$tipo <- NULL
+View(resultado)

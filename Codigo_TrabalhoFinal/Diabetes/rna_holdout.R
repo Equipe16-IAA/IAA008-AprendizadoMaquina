@@ -37,3 +37,13 @@ predict.rna <- predict(rna,teste)
 
 confusionMatrix(predict.rna, as.factor(teste$diabetes))
 
+
+### PREDIÇÕES DE NOVOS CASOS
+dados_novos_casos <- read.csv("databases/10 - Diabetes - novosdados.csv", header = T)
+dados_novos_casos$num <- NULL
+View(dados_novos_casos)
+
+predict.rna <- predict(rna, dados_novos_casos)
+resultado <- cbind(dados_novos_casos, predict.rna)
+resultado$diabetes <- NULL
+View(resultado)
