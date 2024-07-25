@@ -21,7 +21,7 @@ set.seed(2034)
 km.res = kmeans(dados[, 0:(ncol(dados) - 1)],10)
 print(km.res)
 
-table(km.res$cluster, dados$Class)
+table(km.res$cluster, dados$tipo)
 
 resultado <- cbind(dados,km.res$cluster)
 resultado
