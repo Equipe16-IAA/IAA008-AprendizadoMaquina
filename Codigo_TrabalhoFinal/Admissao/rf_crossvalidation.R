@@ -57,7 +57,7 @@ dados_novos_casos <- read.csv("databases/9 - Admissao - novosdados.csv", header 
 View(dados_novos_casos)
 
 dados_novos_casos$ChanceOfAdmit <- NULL
-predict.svm <- predict(svm, dados_novos_casos)
+predict.rf <- predict(rf, dados_novos_casos)
 resultado <- cbind(dados_novos_casos, predict.svm)
 View(resultado)
 
