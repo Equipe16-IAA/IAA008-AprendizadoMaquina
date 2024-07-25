@@ -50,3 +50,16 @@ r2 <- function(predito, observado){ return (1 - (sum((predito-observado)^2)/sum(
 
 r2(predict.rf, teste$ChanceOfAdmit)
 
+
+
+### PREDIÇÕES DE NOVOS CASOS
+dados_novos_casos <- read.csv("databases/9 - Admissao - novosdados.csv", header = T)
+View(dados_novos_casos)
+
+dados_novos_casos$ChanceOfAdmit <- NULL
+predict.svm <- predict(svm, dados_novos_casos)
+resultado <- cbind(dados_novos_casos, predict.svm)
+View(resultado)
+
+
+
